@@ -40,8 +40,13 @@ const CourseSchema = new Schema({
     }
 })
 const myCourse = mongoose.model('Course', CourseSchema);
-
-
+//  added for heroku
+app.get('/', (req, res) => {
+    myCourse.find()
+        .then(course => res.json({ success: true, data: course }))
+        .catch(err => res.json({ success: false, err }))
+});
+// 
 
 app.get('/course', (req, res) => {
     myCourse.find()
